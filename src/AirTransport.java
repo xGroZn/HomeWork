@@ -1,5 +1,3 @@
-package HomeWork6;
-
 public class AirTransport extends Transport{
     private int wingspan;
     private int minLengthStrip;

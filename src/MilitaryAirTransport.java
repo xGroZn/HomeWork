@@ -1,5 +1,3 @@
-package HomeWork6;
-
 import java.security.spec.RSAOtherPrimeInfo;
 
 public class MilitaryAirTransport extends AirTransport{

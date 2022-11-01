@@ -1,5 +1,3 @@
-package HomeWork6;
-
 public class Proverka {
     public static void main(String[] args) {
         PassengerCar passengerCar = new PassengerCar(180, 200, 1700, "Nissan", 4, 10, "Sedan", 4);
@@ -21,7 +19,7 @@ public class Proverka {
 //        civilAirTransport.loadingCivilAirTransport();
 //        System.out.println("=============================================");
 //        militaryAirTransport.shooting();
-//        militaryAirTransport.ejection();
+        militaryAirTransport.ejection();
 
     }
 }

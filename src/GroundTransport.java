@@ -1,5 +1,3 @@
-package HomeWork6;
-
 public class GroundTransport extends Transport {
     private int numWheels;
     private int fuelConsumption;

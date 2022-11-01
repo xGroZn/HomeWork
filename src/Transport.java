@@ -1,5 +1,3 @@
-package HomeWork6;
-
 public class Transport {
     private int power;
     private int maxSpeed;
