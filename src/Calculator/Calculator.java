@@ -1,5 +1,5 @@
 package Calculator;
 
 public interface Calculator {
-    void action (double firstValue, double secondValue);
+    double action (double firstValue, double secondValue);
 }

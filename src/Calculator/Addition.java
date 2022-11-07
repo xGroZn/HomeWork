@@ -2,8 +2,8 @@ package Calculator;
 
 public class Addition implements Calculator {
     @Override
-    public void action(double firstValue, double secondValue) {
+    public double action(double firstValue, double secondValue) {
         double value = firstValue + secondValue;
-        System.out.println("Результат сложения равен " + value);
+        return value;
     }
 }

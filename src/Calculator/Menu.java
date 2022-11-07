@@ -6,11 +6,13 @@ import java.util.Scanner;
 public class Menu {
     private double firstValueOfNumbers;
     private double secondValueOfNumbers;
+    private String firstValueText = "Введите значение первого числа";
+    private String secondValueText = "Введите значение второго числа";
+    Scanner scanner = new Scanner(System.in);
     public void mathOperation() {
         choosingProgram();
     }
     private void choosingProgram() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите значение 1 или 2, где 1 - выход из программы, 2 - начать работу с калькулятором");
         int value = scanner.nextInt();
         switch (value) {
@@ -18,8 +20,8 @@ public class Menu {
                 System.out.println("Good bye");
                 break;
             case 2:
-                inputFirstValueOfNumbers();
-                inputSecondValueOfNumbers();
+                firstValueOfNumbers = inputValueOfNumbers(firstValueText);
+                secondValueOfNumbers = inputValueOfNumbers(secondValueText);
                 inputMathOperationType();
                 choosingProgram();
                 break;
@@ -28,54 +30,45 @@ public class Menu {
                 choosingProgram();
         }
     }
-    private void inputFirstValueOfNumbers() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите значение первого числа");
+    private double inputValueOfNumbers(String text) {
+        System.out.println(text);
+        double value = 0;
         if (!scanner.hasNextDouble()) {
             System.out.println("Ошибка! Введенное значение должно быть числом.");
-            inputFirstValueOfNumbers();
+            scanner.next();
+            return inputValueOfNumbers(text);
         } else {
-            double firstValue = scanner.nextDouble();
-            firstValueOfNumbers = firstValue;
-        }
-    }
-    private void inputSecondValueOfNumbers() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите значение второго числа");
-        if (!scanner.hasNextDouble()) {
-            System.out.println("Ошибка! Введенное значение должно быть числом.");
-            inputSecondValueOfNumbers();
-        } else {
-            double secondValue = scanner.nextDouble();
-            secondValueOfNumbers = secondValue;
+            return scanner.nextDouble();
         }
     }
     private void inputMathOperationType() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите тип математической операции (сложение, вычитание, умножение или деление)");
         if (!scanner.hasNext("сложение") && !scanner.hasNext("вычитание") && !scanner.hasNext("умножение") && !scanner.hasNext("деление")) {
             System.out.println("Ошибка! Введите правильное название операции.");
+            scanner.next();
             inputMathOperationType();
         } else {
             String mathOperationType = scanner.next();
+            double result = 0;
             switch (mathOperationType) {
                 case "сложение":
                     Addition addition = new Addition();
-                    addition.action(firstValueOfNumbers, secondValueOfNumbers);
+                    result = addition.action(firstValueOfNumbers, secondValueOfNumbers);
                     break;
                 case "вычитание":
                     Subtraction subtraction = new Subtraction();
-                    subtraction.action(firstValueOfNumbers, secondValueOfNumbers);
+                    result = subtraction.action(firstValueOfNumbers, secondValueOfNumbers);
                     break;
                 case "умножение":
                     Multiplication multiplication = new Multiplication();
-                    multiplication.action(firstValueOfNumbers, secondValueOfNumbers);
+                    result = multiplication.action(firstValueOfNumbers, secondValueOfNumbers);
                     break;
                 case "деление":
                     Division division = new Division();
-                    division.action(firstValueOfNumbers, secondValueOfNumbers);
+                    result = division.action(firstValueOfNumbers, secondValueOfNumbers);
                     break;
             }
+            System.out.println("Результат выполнения матетматической операции равен " + result);
         }
     }
 }
