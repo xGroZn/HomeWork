@@ -1,7 +1,6 @@
 package Calculator;
 
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
 
@@ -9,7 +8,13 @@ public class Menu {
     private double secondValueOfNumbers;
     private String firstValueText = "Введите значение первого числа";
     private String secondValueText = "Введите значение второго числа";
-    ResultOperationHistoryImpl history = new ResultOperationHistoryImpl();
+    private ResultOperationHistoryImpl history = new ResultOperationHistoryImpl();
+    private ResultOperationHistoryCollectionImpl historyCollection = new ResultOperationHistoryCollectionImpl();
+    private ResultOperationHistoryByHashMap historyByHashMap = new ResultOperationHistoryByHashMap();
+    private LinkedList<Double> linkedListAddition = new LinkedList<>();
+    private LinkedList<Double> linkedListSubtraction = new LinkedList<>();
+    private LinkedList<Double> linkedListMultiplication = new LinkedList<>();
+    private LinkedList<Double> linkedListDivision = new LinkedList<>();
     Scanner scanner = new Scanner(System.in);
 
     public void mathOperation() {
@@ -17,7 +22,7 @@ public class Menu {
     }
 
     private void choosingProgram() {
-        System.out.println("Введите значение 1, 2 или 3, где 1 - выход из программы, 2 - начать работу с калькулятором, 3 - вывод истории операций");
+        System.out.println("Введите значение 1, 2 или 3, где 1 - выход из программы, 2 - начать работу с калькулятором, 3 - вывод истории операций (массивы), 4 - вывод истории операций (коллекции), 5 - вывод истории операций (HashMap)");
         int value = scanner.nextInt();
         switch (value) {
             case 1:
@@ -31,6 +36,14 @@ public class Menu {
                 break;
             case 3:
                 history.printOperationsHistory();
+                choosingProgram();
+                break;
+            case 4:
+                historyCollection.printOperationsHistory();
+                choosingProgram();
+                break;
+            case 5:
+                historyByHashMap.printOperationsHistory();
                 choosingProgram();
                 break;
             default:
@@ -70,24 +83,36 @@ public class Menu {
                 result = addition.action(firstValueOfNumbers, secondValueOfNumbers);
                 System.out.println("Результат выполнения математической операции равен " + result);
                 history.addResultToHistory(result);
+                historyCollection.addResultToHistory(result);
+                linkedListAddition.add(result);
+                historyByHashMap.addResultToHistory(mathOperationType, linkedListAddition);
                 break;
             case "вычитание":
                 Subtraction subtraction = new Subtraction();
                 result = subtraction.action(firstValueOfNumbers, secondValueOfNumbers);
                 System.out.println("Результат выполнения математической операции равен " + result);
                 history.addResultToHistory(result);
+                historyCollection.addResultToHistory(result);
+                linkedListSubtraction.add(result);
+                historyByHashMap.addResultToHistory(mathOperationType, linkedListSubtraction);
                 break;
             case "умножение":
                 Multiplication multiplication = new Multiplication();
                 result = multiplication.action(firstValueOfNumbers, secondValueOfNumbers);
                 System.out.println("Результат выполнения математической операции равен " + result);
                 history.addResultToHistory(result);
+                historyCollection.addResultToHistory(result);
+                linkedListMultiplication.add(result);
+                historyByHashMap.addResultToHistory(mathOperationType, linkedListMultiplication);
                 break;
             case "деление":
                 Division division = new Division();
                 result = division.action(firstValueOfNumbers, secondValueOfNumbers);
                 System.out.println("Результат выполнения математической операции равен " + result);
                 history.addResultToHistory(result);
+                historyCollection.addResultToHistory(result);
+                linkedListDivision.add(result);
+                historyByHashMap.addResultToHistory(mathOperationType, linkedListDivision);
                 break;
             default:
                 try {
